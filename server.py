@@ -13,6 +13,10 @@ AWESOMENESS = [
     'oh-so-not-meh', 'brilliant', 'ducky', 'coolio', 'incredible',
     'wonderful', 'smashing', 'lovely']
 
+DISS_TRACKS = [
+  "stupid", "dogwater", "disrespectful", "mean", "annoying", "dense",
+  "not cool", "rude", "spiteful", "hurtful", "nasty", "cruel"]
+
 
 @app.route('/')
 def start_here():
@@ -60,8 +64,12 @@ def say_hello():
           <input type="radio" name="compliment" value ="smashing"> <label> smashing </label>
           <input type="radio" name="compliment" value ="lovely"> <label> lovely </label>
           <br> 
-          
           <input type="submit" value="Submit">
+        </form>
+
+        <form action="/diss">
+          What's your name? <input type="text" name="person"> <br>
+          <input type="submit" value="If you're not feeling up for a compliment">
         </form>
       </body>
     </html>
@@ -87,6 +95,25 @@ def greet_person():
       </body>
     </html>
     """
+
+@app.route('/diss')
+def diss_person():
+  """Get user by name."""
+
+  player = request.args.get("person")
+  diss = choice(DISS_TRACKS)
+
+  return f"""
+  <!doctype html>
+  <html>
+    <head>
+      <title> A Diss</title>
+    </head>
+    <body>
+      Hi, {player}, I think you're {diss}.
+    </body>
+  </html>
+  """
 
 
 if __name__ == '__main__':
