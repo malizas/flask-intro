@@ -18,7 +18,15 @@ AWESOMENESS = [
 def start_here():
     """Home page."""
 
-    return "<!doctype html><html>Hi! This is the home page.</html>"
+    return """
+    <!doctype html>
+    <html>
+      <body>
+        <h1> Hi! This is the home page. </h1>
+        <a href="/hello"> say hello </a>
+      </body>
+    </html>
+    """
 
 
 @app.route('/hello')
@@ -34,7 +42,25 @@ def say_hello():
       <body>
         <h1>Hi There!</h1>
         <form action="/greet">
-          What's your name? <input type="text" name="person">
+          What's your name? <input type="text" name="person"> <br>
+          Pick a word out of these options. <br>
+          <input type="radio" name="compliment" value ="awesome"> <label> awesome </label>
+          <input type="radio" name="compliment" value ="terrific"> <label> terrific </label>
+          <input type="radio" name="compliment" value ="fantastic"> <label> fantastic </label>
+          <input type="radio" name="compliment" value ="neato"> <label> neato </label> 
+          <input type="radio" name="compliment" value ="fantabulous"> <label> fantabulous </label>
+          <input type="radio" name="compliment" value ="wowza"> <label> wowza </label>
+          <input type="radio" name="compliment" value ="oh-so-not-meh"> <label> oh-so-not-meh </label>
+          <br>
+          <input type="radio" name="compliment" value ="brillant"> <label> brilliant </label>
+          <input type="radio" name="compliment" value ="ducky"> <label> ducky </label>
+          <input type="radio" name="compliment" value ="collio"> <label> collio </label>
+          <input type="radio" name="compliment" value ="incredible"> <label> incredible </label>
+          <input type="radio" name="compliment" value ="wonderful"> <label> wonderful </label>
+          <input type="radio" name="compliment" value ="smashing"> <label> smashing </label>
+          <input type="radio" name="compliment" value ="lovely"> <label> lovely </label>
+          <br> 
+          
           <input type="submit" value="Submit">
         </form>
       </body>
@@ -48,7 +74,7 @@ def greet_person():
 
     player = request.args.get("person")
 
-    compliment = choice(AWESOMENESS)
+    compliment = request.args.get("compliment")
 
     return f"""
     <!doctype html>
